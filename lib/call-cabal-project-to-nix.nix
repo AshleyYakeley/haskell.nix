@@ -118,7 +118,7 @@ in let
     src = src.origSrc or src;
     filter = path: type: (!(src ? filter) || src.filter path type) && (
       type == "directory" ||
-      pkgs.lib.any (i: (pkgs.lib.hasSuffix i path)) [ ".cabal" "package.yaml" ]); };
+      pkgs.lib.any (i: (pkgs.lib.hasSuffix i path)) [ ".cabal" ".yaml" ]); };
 
   # When there is no `cabal.project` file `cabal-install` behaves as if there was
   # one containing `packages: ./*.cabal`.  Even if there is a `cabal.project.local`
@@ -426,7 +426,7 @@ let
           # without the source available (we cleanSourceWith'd it),
           # this may not produce the right result.
           if supportHpack
-            then '' 
+            then ''
               echo No .cabal file found, running hpack on $hpackFile
               hpack $hpackFile
             ''
