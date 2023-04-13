@@ -123,8 +123,8 @@ in
                 lib.any (d: lib.strings.hasPrefix (rPath + "/") d) dirsNeeded)
               || traceReason "cabal package definition" (lib.strings.hasPrefix subDir rPath
                 && lib.strings.hasSuffix ".cabal" rPath)
-              || traceReason "hpack package defintion" (lib.strings.hasPrefix subDir rPath
-                && rPath == "package.yaml")
+              || traceReason "hpack package defintion or other YAML" (lib.strings.hasPrefix subDir rPath
+                && lib.strings.hasSuffix ".yaml" rPath)
               || traceReason "data file" (lib.strings.hasPrefix dataDir rPath
                 && dataFileMatch rPath)
               || traceReason "haskell source dir" (lib.any (d: lib.strings.hasPrefix d rPath) hsSourceDirs)
